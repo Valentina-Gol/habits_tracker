@@ -1,4 +1,4 @@
-package eventloop;
+package controllers;
 
 public class ChangePassword {
 }

@@ -1,6 +1,5 @@
 package database;
 
-import habit.Habit;
 import user.Role;
 import user.User;
 
@@ -8,14 +7,14 @@ import java.util.*;
 
 // todo add errors if user not found
 public class Users {
-    private Map<UUID, User> users = new HashMap<>();
+    private final Map<UUID, User> users = new HashMap<>();
     // todo add two tables not one
-    private Map<String, UUID> emails = new HashMap<>();
+    private final Map<String, UUID> emails = new HashMap<>();
 
     public Users(){
         // todo move to database initialization
-        User user = new User("admin", "admin", Role.ADMIN);
-        addUser(user);
+        addUser(new User("admin", "admin", Role.ADMIN));
+        addUser(new User("user", "user", Role.USER));
     }
 
     public boolean addUser(User user){

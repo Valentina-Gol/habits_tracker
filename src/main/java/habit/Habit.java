@@ -8,10 +8,11 @@ public class Habit {
     private String name = null;
     private String description = null;
     private Frequency frequency = null;
+    // todo change type
     private String creationDate = null;
 
 
-    public Habit(String name, String description, Frequency frequency){
+    public Habit(String name, String description, Frequency frequency) {
         this.name = name;
         this.description = description;
         this.frequency = frequency;
@@ -19,7 +20,7 @@ public class Habit {
         this.creationDate = LocalDateTime.now().toString();
     }
 
-    public Habit(String name, String description, Frequency frequency, UUID id, String date){
+    public Habit(String name, String description, Frequency frequency, UUID id, String date) {
         this.name = name;
         this.description = description;
         this.frequency = frequency;
@@ -57,5 +58,17 @@ public class Habit {
 
     public String getCreationDate() {
         return creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "ID: `%s`, Name: `%s`, Description: `%s`, Frequency: `%s`, Creation date: `%s`",
+            this.getId(),
+            this.getName(),
+            this.getDescription(),
+            this.getFrequency().getTitle(),
+            this.getCreationDate()
+        );
     }
 }

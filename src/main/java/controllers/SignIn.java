@@ -1,4 +1,4 @@
-package eventloop;
+package controllers;
 
 import database.DataBase;
 import user.User;
@@ -12,7 +12,13 @@ public class SignIn {
         String password = scanner.nextLine();
         User user = signIn(dataBase, email, password);
         if (user != null){
-            System.out.println("You signed in.");
+            if (user.isActive()){
+                System.out.println("You signed in.");
+            } else {
+                System.out.println("You was blocked by admin. Access denied.");
+                return null;
+            }
+
         } else {
             System.out.println("Authorization failed.");
         }

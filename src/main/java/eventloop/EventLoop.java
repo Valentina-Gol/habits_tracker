@@ -1,5 +1,6 @@
 package eventloop;
 
+import controllers.*;
 import database.DataBase;
 import user.Role;
 import user.User;
@@ -32,6 +33,7 @@ public class EventLoop {
     private final String[] authorizedAdminCommands = new String[]{
         "block",
         "unblock",
+        "show_users",
         "sign_out",
         "register",
         "exit",
@@ -86,6 +88,7 @@ public class EventLoop {
                     break;
 
                 case "add_habit":
+                    AddHabit.run(scanner, dataBase, signedInUser);
                     break;
                 case "remove_habit":
                     break;

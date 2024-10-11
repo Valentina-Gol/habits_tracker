@@ -1,11 +1,12 @@
 package database;
 
+import habit.Habit;
 import user.User;
 
 public class DataBase {
-    private Users users = new Users();
-    private Habits habits = new Habits();
-    private UserHabit usersHabits = new UserHabit();
+    private final Users users = new Users();
+    private final Habits habits = new Habits();
+    private final UserHabit usersHabits = new UserHabit();
 
     public boolean addUser(User user){
         return users.addUser(user);
@@ -13,6 +14,17 @@ public class DataBase {
 
     public User getUser(String email, String password){
         return users.getUser(email, password);
+    }
+
+    public boolean addHabit(User user, Habit habit){
+        // todo check something
+        habits.addHabit(habit);
+        usersHabits.addHabit(habit.getId(), user.getId());
+        return true;
+    }
+
+    public void deleteHabit(){
+
     }
 
 }

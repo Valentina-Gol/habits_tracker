@@ -69,5 +69,15 @@ public class User {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    @Override
+    public String toString(){
+        return String.format(
+            "ID: `%s`, Name: `%s`, Email: `%s`",
+            this.getId(),
+            this.getName(),
+            this.getEmail()
+        );
+    }
 }
 
