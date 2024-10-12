@@ -8,7 +8,7 @@ import java.util.*;
 public class HabitsProgress {
     private final Map<UUID, HabitProgress> habitsProgress = new HashMap<>();
 
-    // todo don't store second and later perform per day?
+    // todo don't store second and later perform per day
     public HabitProgress performHabit(UUID id){
         HabitProgress progress = new HabitProgress(id);
         habitsProgress.put(UUID.randomUUID(), progress);

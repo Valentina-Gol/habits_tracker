@@ -132,6 +132,7 @@ public class EventLoop {
                     PerformHabit.run(scanner, dataBase, signedInUser);
                     break;
                 case "show_habit_statistic":
+                    ShowStatistic.run(scanner, dataBase, signedInUser);
                     break;
                 case "show_habit_progress":
                     ShowHabitProgressHistory.run(scanner, dataBase, signedInUser);

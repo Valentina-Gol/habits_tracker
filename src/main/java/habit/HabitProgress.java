@@ -29,8 +29,7 @@ public class HabitProgress {
     @Override
     public String toString(){
         return String.format(
-            "ID: `%s`, Perform date: `%s`",
-            this.getHabitId(),
+            "Perform date: `%s`",
             this.getDateProgress().toString()
         );
     }

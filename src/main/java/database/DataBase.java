@@ -86,6 +86,10 @@ public class DataBase {
         habitsProgress.removeHabitProgress(habitId);
     }
 
+    public Habit getHabit(UUID habitId){
+        return habits.getHabit(habitId);
+    }
+
     public void changeHabitName(UUID habitId, String newName){
         habits.updateHabitName(habitId, newName);
     }
@@ -109,5 +113,17 @@ public class DataBase {
 
     public List<HabitProgress> getHabitProgressHistory(UUID habitId){
         return habitsProgress.getAllHabitProgress(habitId);
+    }
+
+    public List<HabitProgress> getWeekHabitProgress(UUID habitId){
+        return habitsProgress.getWeekHabitProgress(habitId);
+    }
+
+    public List<HabitProgress> getMonthHabitProgress(UUID habitId){
+        return habitsProgress.getMonthHabitProgress(habitId);
+    }
+
+    public List<HabitProgress> getYearHabitProgress(UUID habitId){
+        return habitsProgress.getYearHabitProgress(habitId);
     }
 }
