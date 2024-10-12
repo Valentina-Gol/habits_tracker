@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class SignIn {
     public static User run(Scanner scanner, DataBase dataBase){
-        System.out.println("Enter email and password each from new line");
+        System.out.println("Enter email and password each from new line:");
         String email = scanner.nextLine();
         String password = scanner.nextLine();
         User user = signIn(dataBase, email, password);

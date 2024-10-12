@@ -1,6 +1,7 @@
 package database;
 
 import habit.Habit;
+import user.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,4 +27,9 @@ public class UserHabit {
         // todo finish
         return new Habit[]{};
     }
+
+    public UUID getUserId(UUID habitId){
+        return usersHabits.get(habitId);
+    }
+
 }

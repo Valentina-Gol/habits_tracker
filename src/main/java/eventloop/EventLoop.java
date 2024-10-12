@@ -33,6 +33,7 @@ public class EventLoop {
     private final String[] authorizedAdminCommands = new String[]{
         "block",
         "unblock",
+        "change_password",
         "show_users",
         "sign_out",
         "register",
@@ -40,8 +41,8 @@ public class EventLoop {
     };
     private ServiceStatus status = ServiceStatus.NOT_AUTHORIZED;
     private User signedInUser = null;
-    private Map<ServiceStatus, String[]> availableCommands = new HashMap<>(3);
-    private DataBase dataBase = new DataBase();
+    private final Map<ServiceStatus, String[]> availableCommands = new HashMap<>(3);
+    private final DataBase dataBase = new DataBase();
 
     public void startLoop(){
         availableCommands.put(ServiceStatus.NOT_AUTHORIZED, notAuthorizedCommands);
@@ -91,6 +92,7 @@ public class EventLoop {
                     AddHabit.run(scanner, dataBase, signedInUser);
                     break;
                 case "remove_habit":
+                    DeleteHabit.run(scanner, dataBase, signedInUser);
                     break;
                 case "edit_habit":
                     break;
@@ -104,8 +106,13 @@ public class EventLoop {
                     break;
 
                 case "block":
+                    BlockUser.run(scanner, dataBase);
                     break;
                 case "unblock":
+                    UnblockUser.run(scanner, dataBase);
+                    break;
+                case "show_users":
+                    ShowUsers.run(dataBase);
                     break;
                 case "exit":
                     System.out.println("Bye bye!");

@@ -55,6 +55,10 @@ public class Users {
         }
     }
 
+    public List<User> getUsersList(){
+        return new ArrayList<>(this.users.values());
+    }
+
     public User getUser(UUID id){
         return users.get(id);
     }

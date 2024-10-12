@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class AddHabit {
     public static void run(Scanner scanner, DataBase dataBase, User user){
-        System.out.println("Enter habit name, description, frequency(WEEKLY, DAILY) each from new line");
+        System.out.println("Enter habit name, description, frequency(WEEKLY, DAILY) each from new line:");
         String name = scanner.nextLine();
         String description = scanner.nextLine();
         Frequency frequency;
@@ -21,9 +21,9 @@ public class AddHabit {
         }
         Habit habit = new Habit(name, description, frequency);
         if (dataBase.addHabit(user, habit)){
-            System.out.println("Habit successfully created");
+            System.out.println("Habit successfully created.");
         } else {
-            System.out.println("Something went wrong on habit creation");
+            System.out.println("Something went wrong on habit creation.");
         }
     }
 

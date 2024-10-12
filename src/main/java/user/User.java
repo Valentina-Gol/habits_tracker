@@ -73,10 +73,11 @@ public class User {
     @Override
     public String toString(){
         return String.format(
-            "ID: `%s`, Name: `%s`, Email: `%s`",
+            "ID: `%s`, Name: `%s`, Email: `%s`, Status: `%s`",
             this.getId(),
             this.getName(),
-            this.getEmail()
+            this.getEmail(),
+            this.isActive() ? "active" : "blocked"
         );
     }
 }
