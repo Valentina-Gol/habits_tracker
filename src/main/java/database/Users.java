@@ -53,7 +53,7 @@ public class Users {
 
     public void updateUserName(UUID id, String name){
         User user = users.get(id);
-        user.setPassword(name);
+        user.setName(name);
     }
 
     public List<User> getUsersList(){

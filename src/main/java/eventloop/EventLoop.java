@@ -30,7 +30,10 @@ public class EventLoop {
         "change_password",
         "change_email",
         "change_name",
+        "change_habit_name",
+        "change_habit_description",
         "sign_out",
+        "delete_account",
         "exit",
     };
     private final String[] authorizedAdminCommands = new String[]{
@@ -43,6 +46,7 @@ public class EventLoop {
         "change_password",
         "change_email",
         "change_name",
+        "delete_account",
         "exit",
     };
     private ServiceStatus status = ServiceStatus.NOT_AUTHORIZED;
@@ -78,6 +82,7 @@ public class EventLoop {
                     }
                     break;
                 case "show_account_info":
+                    ShowUser.run(dataBase, signedInUser);
                     break;
                 case "change_password":
                     ChangeUserPassword.run(scanner, dataBase, signedInUser);
@@ -89,6 +94,9 @@ public class EventLoop {
                     ChangeUserName.run(scanner, dataBase, signedInUser);
                     break;
                 case "delete_account":
+                    if (DeleteUser.run(scanner, dataBase, signedInUser)){
+                        signOut();
+                    }
                     break;
                 case "sign_in":
                     User user = SignIn.run(scanner, dataBase);
@@ -111,7 +119,11 @@ public class EventLoop {
                 case "remove_habit":
                     DeleteHabit.run(scanner, dataBase, signedInUser);
                     break;
-                case "edit_habit_description":
+                case "change_habit_name":
+                    ChangeHabitName.run(scanner, dataBase, signedInUser);
+                    break;
+                case "change_habit_description":
+                    ChangeHabitDescription.run(scanner, dataBase, signedInUser);
                     break;
                 case "show_habits":
                     ShowHabits.run(dataBase, signedInUser);
@@ -127,7 +139,6 @@ public class EventLoop {
                 case "show_habit_streak":
                     ShowHabitStreak.run(scanner, dataBase, signedInUser);
                     break;
-                // todo resume habit, suspend habit some day
 
                 case "block":
                     BlockUser.run(scanner, dataBase);

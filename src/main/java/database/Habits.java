@@ -1,7 +1,6 @@
 package database;
 
 import habit.Habit;
-import user.User;
 
 import java.util.*;
 
@@ -16,8 +15,12 @@ public class Habits {
         habits.remove(id);
     }
 
-    public void updateHabit(Habit habit){
+    public void updateHabitDescription(UUID id, String description){
+        habits.get(id).setDescription(description);
+    }
 
+    public void updateHabitName(UUID id, String name){
+        habits.get(id).setName(name);
     }
 
     public Habit getHabit(UUID id){

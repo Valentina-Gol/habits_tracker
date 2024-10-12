@@ -16,6 +16,7 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+habits_tracker.jar
 
 ### Eclipse ###
 .apt_generated

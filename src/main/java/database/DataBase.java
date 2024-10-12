@@ -31,6 +31,10 @@ public class DataBase {
         return users.getUser(email);
     }
 
+    public User getUser(UUID userId){
+        return users.getUser(userId);
+    }
+
     public User getUser(String email, String password){
         return users.getUser(email, password);
     }
@@ -59,8 +63,16 @@ public class DataBase {
         users.unblockUser(userId);
     }
 
+    public void deleteUser(UUID userId){
+        List<Habit> habits = getHabits(userId);
+        for (Habit habit: habits){
+            deleteHabit(habit.getId());
+        }
+        users.deleteUser(userId);
+    }
+
     public boolean addHabit(User user, Habit habit){
-        // todo check something
+        // todo check something?
         habits.addHabit(habit);
         usersHabits.addHabit(habit.getId(), user.getId());
         habitsStreaks.addStreak(habit.getId(), habit.getFrequency().getDaysInterval());
@@ -72,6 +84,14 @@ public class DataBase {
         habits.deleteHabit(habitId);
         habitsStreaks.removeStreak(habitId);
         habitsProgress.removeHabitProgress(habitId);
+    }
+
+    public void changeHabitName(UUID habitId, String newName){
+        habits.updateHabitName(habitId, newName);
+    }
+
+    public void changeHabitDescription(UUID habitId, String newDescription){
+        habits.updateHabitDescription(habitId, newDescription);
     }
 
     public List<Habit> getHabits(UUID userId){
