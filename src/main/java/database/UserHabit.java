@@ -3,9 +3,7 @@ package database;
 import habit.Habit;
 import user.User;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class UserHabit {
     private final Map<UUID, UUID> usersHabits = new HashMap<>();
@@ -23,9 +21,14 @@ public class UserHabit {
         return null;
     }
 
-    public Habit[] getHabits(UUID userId){
-        // todo finish
-        return new Habit[]{};
+    public List<UUID> getUserHabits(UUID userId){
+        List<UUID> habitsIds = new ArrayList<>();
+        for (Map.Entry<UUID, UUID> entry: usersHabits.entrySet()){
+            if (entry.getValue().equals(userId)){
+                habitsIds.add(entry.getKey());
+            }
+        }
+        return habitsIds;
     }
 
     public UUID getUserId(UUID habitId){

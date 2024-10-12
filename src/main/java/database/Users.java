@@ -8,7 +8,7 @@ import java.util.*;
 // todo add errors if user not found
 public class Users {
     private final Map<UUID, User> users = new HashMap<>();
-    // todo add two tables not one
+    // todo add Emails class (another table)
     private final Map<String, UUID> emails = new HashMap<>();
 
     public Users(){
@@ -26,6 +26,10 @@ public class Users {
         return false;
     }
 
+    public boolean isExistingEmail(String email){
+        return emails.containsKey(email);
+    }
+
     public void deleteUser(UUID id){
         User user = users.get(id);
         if (user != null){
@@ -34,25 +38,22 @@ public class Users {
         }
     }
 
-    public void updateUser(UUID id, String name, String email, String password){
+    public void updateUserPassword(UUID id, String password){
+        // todo encrypt
         User user = users.get(id);
-        if (user!= null){
-            if (!user.getEmail().equals(email)){
-                if (!emails.containsKey(email)){
-                    if (email != null){
-                        emails.remove(user.getEmail());
-                        emails.put(email, user.getId());
-                        user.setEmail(email);
-                    }
-                    if (name != null){
-                        user.setName(name);
-                    }
-                    if (password != null){
-                        user.setPassword(password);
-                    }
-                }
-            }
-        }
+        user.setPassword(password);
+    }
+
+    public void updateUserEmail(UUID id, String email){
+        User user = users.get(id);
+        emails.remove(user.getEmail());
+        emails.put(email, user.getId());
+        user.setEmail(email);
+    }
+
+    public void updateUserName(UUID id, String name){
+        User user = users.get(id);
+        user.setPassword(name);
     }
 
     public List<User> getUsersList(){

@@ -1,10 +1,9 @@
 package database;
 
 import habit.Habit;
+import user.User;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Habits {
     private final Map<UUID, Habit> habits = new HashMap<>();
@@ -23,5 +22,13 @@ public class Habits {
 
     public Habit getHabit(UUID id){
         return habits.get(id);
+    }
+
+    public List<Habit> getHabitsList(List<UUID> habitsId){
+        List<Habit> habits = new ArrayList<>();
+        for (UUID id: habitsId){
+            habits.add(this.habits.get(id));
+        }
+        return habits;
     }
 }

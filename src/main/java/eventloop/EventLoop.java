@@ -24,19 +24,24 @@ public class EventLoop {
         "edit_habit",
         "progress_habit",
         "show_habits",
-        "show_habit",
         "show_habit_progress",
+        "show_info",
         "change_password",
+        "change_email",
+        "change_name",
         "sign_out",
         "exit",
     };
     private final String[] authorizedAdminCommands = new String[]{
         "block",
         "unblock",
-        "change_password",
         "show_users",
         "sign_out",
         "register",
+        "show_info",
+        "change_password",
+        "change_email",
+        "change_name",
         "exit",
     };
     private ServiceStatus status = ServiceStatus.NOT_AUTHORIZED;
@@ -71,7 +76,18 @@ public class EventLoop {
                         System.out.println("Sign out to register new account.");
                     }
                     break;
+                case "show_info":
+                    break;
                 case "change_password":
+                    ChangeUserPassword.run(scanner, dataBase, signedInUser);
+                    break;
+                case "change_email":
+                    ChangeUserEmail.run(scanner, dataBase, signedInUser);
+                    break;
+                case "change_name":
+                    ChangeUserName.run(scanner, dataBase, signedInUser);
+                    break;
+                case "delete_account":
                     break;
                 case "sign_in":
                     User user = SignIn.run(scanner, dataBase);
@@ -96,11 +112,10 @@ public class EventLoop {
                     break;
                 case "edit_habit":
                     break;
-                case "progress_habit":
-                    break;
                 case "show_habits":
+                    ShowHabits.run(dataBase, signedInUser);
                     break;
-                case "show_habit":
+                case "progress_habit":
                     break;
                 case "show_habit_progress":
                     break;

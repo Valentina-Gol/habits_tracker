@@ -31,6 +31,22 @@ public class DataBase {
         return users.getUser(email, password);
     }
 
+    public void changeUserEmail(UUID userId, String newEmail){
+        users.updateUserEmail(userId, newEmail);
+    }
+
+    public void changeUserPassword(UUID userId, String newPassword){
+        users.updateUserPassword(userId, newPassword);
+    }
+
+    public void changeUserName(UUID userId, String newName){
+        users.updateUserName(userId, newName);
+    }
+
+    public boolean isExistingEmail(String email){
+        return users.isExistingEmail(email);
+    }
+
     public void blockUser(UUID userId){
         users.blockUser(userId);
     }
@@ -49,6 +65,10 @@ public class DataBase {
     public void deleteHabit(UUID habitId){
         usersHabits.deleteHabit(habitId);
         habits.deleteHabit(habitId);
+    }
+
+    public List<Habit> getHabits(UUID userId){
+        return habits.getHabitsList(usersHabits.getUserHabits(userId));
     }
 
 }
