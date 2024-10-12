@@ -4,12 +4,12 @@ import java.util.UUID;
 import java.time.LocalDateTime;
 
 public class Habit {
-    private UUID id = null;
-    private String name = null;
-    private String description = null;
-    private Frequency frequency = null;
-    // todo change type
-    private String creationDate = null;
+    private final UUID id;
+    private String name;
+    private String description;
+    private Frequency frequency;
+    // todo change to ZoneDateTime?
+    private final LocalDateTime creationDate;
 
 
     public Habit(String name, String description, Frequency frequency) {
@@ -17,10 +17,10 @@ public class Habit {
         this.description = description;
         this.frequency = frequency;
         this.id = UUID.randomUUID();
-        this.creationDate = LocalDateTime.now().toString();
+        this.creationDate = LocalDateTime.now();
     }
 
-    public Habit(String name, String description, Frequency frequency, UUID id, String date) {
+    public Habit(String name, String description, Frequency frequency, UUID id, LocalDateTime date) {
         this.name = name;
         this.description = description;
         this.frequency = frequency;
@@ -56,7 +56,7 @@ public class Habit {
         return id;
     }
 
-    public String getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
@@ -68,7 +68,7 @@ public class Habit {
             this.getName(),
             this.getDescription(),
             this.getFrequency().getTitle(),
-            this.getCreationDate()
+            this.getCreationDate().toString()
         );
     }
 }

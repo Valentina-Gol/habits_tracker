@@ -3,10 +3,10 @@ package user;
 import java.util.UUID;
 
 public class User {
-    private UUID id = null;
-    private String name = null;
-    private String email = null;
-    private String password = null;
+    private final UUID id;
+    private String name = "<not set>";
+    private String email;
+    private String password;
     private Role role = Role.USER;
     private boolean isActive = true;
 
@@ -17,7 +17,6 @@ public class User {
         this.password = password;
         this.id = UUID.randomUUID();
         this.role = role;
-        this.name = name;
     }
 
     public User(String name, String email, String password, UUID id, Role role, boolean isActive){

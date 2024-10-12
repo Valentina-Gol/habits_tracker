@@ -11,21 +11,22 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class EventLoop {
+    // todo make enum for commands
     private final String[] notAuthorizedCommands = new String[]{
         "register",
-        "change_password",
         "sign_in",
-        "sign_out",
         "exit",
     };
     private final String[] authorizedUserCommands = new String[]{
         "add_habit",
         "remove_habit",
-        "edit_habit",
-        "progress_habit",
+        "edit_habit_description",
+        "perform_habit",
         "show_habits",
+        "show_habit_statistic",
         "show_habit_progress",
-        "show_info",
+        "show_habit_streak",
+        "show_account_info",
         "change_password",
         "change_email",
         "change_name",
@@ -38,7 +39,7 @@ public class EventLoop {
         "show_users",
         "sign_out",
         "register",
-        "show_info",
+        "show_account_info",
         "change_password",
         "change_email",
         "change_name",
@@ -63,7 +64,7 @@ public class EventLoop {
                 System.out.printf("- %s\n", commandName);
             }
             String command = scanner.nextLine();
-            if (Arrays.stream(curCommands).noneMatch(avComm -> command.equals(avComm))){
+            if (Arrays.stream(curCommands).noneMatch(command::equals)){
                 System.out.printf("Command `%s` doesn't available or doesn't exist. Select another command.\n", command);
                 continue;
             }
@@ -76,7 +77,7 @@ public class EventLoop {
                         System.out.println("Sign out to register new account.");
                     }
                     break;
-                case "show_info":
+                case "show_account_info":
                     break;
                 case "change_password":
                     ChangeUserPassword.run(scanner, dataBase, signedInUser);
@@ -110,15 +111,23 @@ public class EventLoop {
                 case "remove_habit":
                     DeleteHabit.run(scanner, dataBase, signedInUser);
                     break;
-                case "edit_habit":
+                case "edit_habit_description":
                     break;
                 case "show_habits":
                     ShowHabits.run(dataBase, signedInUser);
                     break;
-                case "progress_habit":
+                case "perform_habit":
+                    PerformHabit.run(scanner, dataBase, signedInUser);
+                    break;
+                case "show_habit_statistic":
                     break;
                 case "show_habit_progress":
+                    ShowHabitProgressHistory.run(scanner, dataBase, signedInUser);
                     break;
+                case "show_habit_streak":
+                    ShowHabitStreak.run(scanner, dataBase, signedInUser);
+                    break;
+                // todo resume habit, suspend habit some day
 
                 case "block":
                     BlockUser.run(scanner, dataBase);

@@ -9,6 +9,8 @@ import java.util.List;
 public class ShowHabits {
     public static void run(DataBase dataBase, User user){
         List<Habit> habits = dataBase.getHabits(user.getId());
+        // todo set filter by date
+
         if (!habits.isEmpty()){
             System.out.println("Your habits:");
             for (int i = 0; i < habits.size(); i++){
