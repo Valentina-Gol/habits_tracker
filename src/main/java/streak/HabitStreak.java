@@ -1,13 +1,19 @@
 package streak;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class HabitStreak {
     private final UUID habitId;
+    @Setter
     private LocalDateTime lastUpdate = null;
-    private int interval;
+    private final int interval;
+    @Getter
     private int curCount = 0;
+    @Getter
     private int maxCount = 0;
 
     public HabitStreak(UUID id, int interval){
@@ -32,18 +38,6 @@ public class HabitStreak {
         } else {
             resetCurCount();
         }
-    }
-
-    public void setLastUpdate(LocalDateTime newDate) {
-        this.lastUpdate = newDate;
-    }
-
-    public int getCurCount() {
-        return curCount;
-    }
-
-    public int getMaxCount(){
-        return this.maxCount;
     }
 
     private void resetCurCount(){

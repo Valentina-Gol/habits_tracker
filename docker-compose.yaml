@@ -1,0 +1,11 @@
+version: "3.3"
+services:
+  postgres:
+    image: postgres:17.0
+    container_name: "psql_habits_tracker"
+    environment:
+      - 'POSTGRES_DB=habits_tracker'
+      - 'POSTGRES_USER=user'
+      - 'POSTGRES_PASSWORD=password'
+    ports:
+      - "5433:5432"

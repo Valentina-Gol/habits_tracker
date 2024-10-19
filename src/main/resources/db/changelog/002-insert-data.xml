@@ -1,0 +1,23 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="vgolubeva" id="002-insert-data">
+        <sql>
+            INSERT INTO users (id, name, email, password, role, active) VALUES
+            (1, 'U', 'user', 'user', 'user', TRUE),
+            (2, 'A', 'admin', 'admin', 'admin', TRUE);
+
+            INSERT INTO habits (id, name, description, creation_date, frequency) VALUES
+            (1, 'it-hub', 'coding', CURRENT_TIMESTAMP, 'DAILY'),
+            (2, 'gym', 'be strong', CURRENT_TIMESTAMP, 'WEAKLY');
+
+            INSERT INTO users_habits (id, user_id) VALUES
+            (1, 1),
+            (2, 1);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

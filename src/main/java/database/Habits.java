@@ -2,10 +2,16 @@ package database;
 
 import habit.Habit;
 
+import java.sql.Connection;
 import java.util.*;
 
 public class Habits {
     private final Map<UUID, Habit> habits = new HashMap<>();
+    private final Connection connection;
+
+    public Habits(Connection connection){
+        this.connection = connection;
+    }
 
     public void addHabit(Habit habit){
         habits.put(habit.getId(), habit);

@@ -1,13 +1,24 @@
 package user;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
+@Getter
 public class User {
     private final UUID id;
+    private final Role role;
+
+    @Setter
     private String name = "<not set>";
+
+    @Setter
     private String email;
+
+    @Setter
     private String password;
-    private Role role = Role.USER;
+
+    @Setter
     private boolean isActive = true;
 
     public User(String email, String password, Role role){
@@ -28,55 +39,14 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        // todo encrypt
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
     @Override
     public String toString(){
         return String.format(
             "ID: `%s`, Name: `%s`, Email: `%s`, Status: `%s`",
-            this.getId(),
-            this.getName(),
-            this.getEmail(),
-            this.isActive() ? "active" : "blocked"
+            this.id,
+            this.name,
+            this.email,
+            this.isActive ? "active" : "blocked"
         );
     }
 }

@@ -2,11 +2,17 @@ package database;
 
 import habit.HabitProgress;
 
+import java.sql.Connection;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class HabitsProgress {
     private final Map<UUID, HabitProgress> habitsProgress = new HashMap<>();
+    private final Connection connection;
+
+    public HabitsProgress(Connection connection){
+        this.connection = connection;
+    }
 
     // todo don't store second and later perform per day
     public HabitProgress performHabit(UUID id){
