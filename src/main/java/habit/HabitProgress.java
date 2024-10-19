@@ -1,8 +1,11 @@
 package habit;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
 public class HabitProgress {
     private final UUID habitId;
     // todo only days store
@@ -16,14 +19,6 @@ public class HabitProgress {
     public HabitProgress(UUID id, LocalDateTime date){
         this.habitId = id;
         this.dateProgress = date;
-    }
-
-    public UUID getHabitId() {
-        return habitId;
-    }
-
-    public LocalDateTime getDateProgress() {
-        return dateProgress;
     }
 
     @Override

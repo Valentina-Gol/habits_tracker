@@ -2,9 +2,11 @@ package eventloop;
 
 import controllers.*;
 import database.DataBase;
+import liquibase.exception.LiquibaseException;
 import user.Role;
 import user.User;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,13 +54,16 @@ public class EventLoop {
     private ServiceStatus status = ServiceStatus.NOT_AUTHORIZED;
     private User signedInUser = null;
     private final Map<ServiceStatus, String[]> availableCommands = new HashMap<>(3);
-    private final DataBase dataBase = new DataBase();
+    private DataBase dataBase;
 
-    public void startLoop(){
+    public EventLoop() throws SQLException, LiquibaseException {
         availableCommands.put(ServiceStatus.NOT_AUTHORIZED, notAuthorizedCommands);
         availableCommands.put(ServiceStatus.USER_AUTHORIZED, authorizedUserCommands);
         availableCommands.put(ServiceStatus.ADMIN_AUTHORIZED, authorizedAdminCommands);
+        dataBase = new DataBase();
+    }
 
+    public void startLoop() throws SQLException{
         Scanner scanner = new Scanner(System.in);
         exit:
         while (true){
@@ -152,6 +157,7 @@ public class EventLoop {
                     break;
                 case "exit":
                     System.out.println("Bye bye!");
+                    dataBase.closeConnection();
                     break exit;
             }
         }

@@ -3,6 +3,7 @@ package database;
 import user.Role;
 import user.User;
 
+import java.sql.Connection;
 import java.util.*;
 
 // todo add errors if user not found
@@ -10,8 +11,11 @@ public class Users {
     private final Map<UUID, User> users = new HashMap<>();
     // todo add Emails class (another table)
     private final Map<String, UUID> emails = new HashMap<>();
+    private final Connection connection;
 
-    public Users(){
+
+    public Users(Connection connection){
+        this.connection = connection;
         // todo move to database initialization
         addUser(new User("admin", "admin", Role.ADMIN));
         addUser(new User("user", "user", Role.USER));
@@ -57,6 +61,11 @@ public class Users {
     }
 
     public List<User> getUsersList(){
+        // todo get data from sql, create classes here, return
+        // todo migrate id to int
+
+
+
         return new ArrayList<>(this.users.values());
     }
 

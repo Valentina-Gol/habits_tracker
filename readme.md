@@ -2,13 +2,12 @@
 ```
 Java17
 Gradle
+Docker
+Docker-compose
 ```
 
 # How to run it on Linux
 ```
+docker-compose up -d
 ./gradlew build && java -jar habits_tracker.jar
 ```
-
-
-# Iterations
-1. Homework1: https://github.com/Valentina-Gol/habits_tracker/pull/1

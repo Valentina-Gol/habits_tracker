@@ -2,18 +2,49 @@ package database;
 
 import habit.Habit;
 import habit.HabitProgress;
+import liquibase.Liquibase;
+import liquibase.database.Database;
+import liquibase.database.DatabaseFactory;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.LiquibaseException;
+import liquibase.resource.ClassLoaderResourceAccessor;
 import streak.HabitStreak;
 import user.User;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
 public class DataBase {
-    private final Users users = new Users();
-    private final Habits habits = new Habits();
-    private final UserHabit usersHabits = new UserHabit();
-    private final HabitsProgress habitsProgress = new HabitsProgress();
-    private final HabitsStreaks habitsStreaks = new HabitsStreaks();
+    private final Connection connection;
+    private final Users users;
+    private final Habits habits;
+    private final UserHabit usersHabits;
+    private final HabitsProgress habitsProgress;
+    private final HabitsStreaks habitsStreaks;
+
+    // todo handle exception?
+    public DataBase() throws SQLException, LiquibaseException {
+        // todo move settings somewhere
+        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/habits_tracker", "user", "password");
+        // todo add SEQUENCE
+        Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+        Liquibase liquibase = new Liquibase("db/changelog/changelog.xml", new ClassLoaderResourceAccessor(), database);
+        liquibase.update();
+        System.out.println("Migrations done!");
+
+        users = new Users(connection);
+        habits = new Habits(connection);
+        usersHabits = new UserHabit(connection);
+        habitsProgress = new HabitsProgress(connection);
+        habitsStreaks = new HabitsStreaks(connection);
+    }
+
+    public void closeConnection() throws SQLException{
+        connection.close();
+    }
 
     public boolean addUser(User user){
         return users.addUser(user);
