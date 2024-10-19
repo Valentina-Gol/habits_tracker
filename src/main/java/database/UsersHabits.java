@@ -1,16 +1,15 @@
 package database;
 
 import habit.Habit;
-import user.User;
 
 import java.sql.Connection;
 import java.util.*;
 
-public class UserHabit {
+public class UsersHabits {
     private final Map<UUID, UUID> usersHabits = new HashMap<>();
     private final Connection connection;
 
-    public UserHabit(Connection connection){
+    public UsersHabits(Connection connection){
         this.connection = connection;
     }
 

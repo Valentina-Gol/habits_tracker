@@ -9,10 +9,48 @@
             CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
             name VARCHAR(100),
-            email VARCHAR(50),
-            password VARCHAR(100),
-            role VARCHAR(20),
-            active BOOL);
+            email VARCHAR(50) NOT NULL,
+            password VARCHAR(100) NOT NULL,
+            role VARCHAR(20) NOT NULL,
+            active BOOL NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS habits (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100),
+            description VARCHAR(300),
+            creation_date TIMESTAMP WITH TIME ZONE,
+            frequency VARCHAR(20) NOT NULL DEFAULT 'DAILY'
+            );
+
+            CREATE TABLE IF NOT EXISTS users_habits (
+            id SERIAL PRIMARY KEY,
+            user_id SERIAL NOT NULL,
+            FOREIGN KEY (id) REFERENCES habits (id)
+            ON DELETE CASCADE ON UPDATE CASCADE,
+            FOREIGN KEY (user_id) REFERENCES users (id)
+            ON DELETE CASCADE ON UPDATE CASCADE
+            );
+
+            CREATE TABLE IF NOT EXISTS habits_progress (
+            id SERIAL PRIMARY KEY,
+            habit_id SERIAL NOT NULL,
+            date TIMESTAMP WITH TIME ZONE NOT NULL,
+            FOREIGN KEY (habit_id) REFERENCES habits (id)
+            ON DELETE CASCADE ON UPDATE CASCADE
+            );
+
+            CREATE TABLE IF NOT EXISTS habits_streaks (
+            id SERIAL PRIMARY KEY,
+            habit_id SERIAL NOT NULL,
+            interval INTEGER NOT NULL,
+            cur_count INTEGER DEFAULT 0,
+            max_count INTEGER DEFAULT 0,
+            last_update TIMESTAMP WITH TIME ZONE,
+            FOREIGN KEY (habit_id) REFERENCES habits (id)
+            ON DELETE CASCADE ON UPDATE CASCADE
+            );
+
         </sql>
     </changeSet>
 

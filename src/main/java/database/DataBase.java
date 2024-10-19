@@ -21,7 +21,7 @@ public class DataBase {
     private final Connection connection;
     private final Users users;
     private final Habits habits;
-    private final UserHabit usersHabits;
+    private final UsersHabits usersHabits;
     private final HabitsProgress habitsProgress;
     private final HabitsStreaks habitsStreaks;
 
@@ -37,7 +37,7 @@ public class DataBase {
 
         users = new Users(connection);
         habits = new Habits(connection);
-        usersHabits = new UserHabit(connection);
+        usersHabits = new UsersHabits(connection);
         habitsProgress = new HabitsProgress(connection);
         habitsStreaks = new HabitsStreaks(connection);
     }
